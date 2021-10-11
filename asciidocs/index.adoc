@@ -1,0 +1,66 @@
+= Farmverwaltung
+Benjamin Ecker
+1.0.0, 2021-10-07
+ifndef::imagesdir[:imagesdir: images]
+//:toc-placement!:  // prevents the generation of the doc at this position, so it can be printed afterwards
+:sourcedir: ../src/main/java
+:icons: font
+:sectnums:    // Nummerierung der Überschriften / section numbering
+:toc: left
+
+//Need this blank line after ifdef, don't know why...
+ifdef::backend-html5[]
+
+// print the toc here (not at the default position)
+//toc::[]
+
+== Beschreibung
+Farmverwaltung ist eine Applikation die es dem Benutzer, im Anwendungsfall einem Landwirt, ermöglicht seine Ställe zu verwalten, sowie sein Vieh und sein Saatgut welches sich darin befindet.
+
+== Klassendiagramm
+[plantuml,cld,png]
+----
+@startuml
+class Animal {
+    -id: Long
+    -species : String
+    -name: String
+    -gender: String
+    -birthDate: LocalDate
+    -stabled: boolean
+}
+
+class Stable {
+    -id: Long
+    -animals: List<Animal>
+    -harvestGoods: List<HarvestGoods>
+}
+
+class HarvestGood {
+    -name: String
+    -isFeed: boolean
+    -quantity: Integer
+}
+
+Stable "1" -left- "*" Animal
+Stable "1" -right- "*" HarvestGood
+@enduml
+----
+
+== Use-Case Diagramm
+[plantuml,ucd,png]
+----
+@startuml
+left to right direction
+:Farmer:
+
+rectangle "Farmverwaltung" {
+    Farmer -- (manage Stables)
+    Farmer -- (manage Animals)
+    Farmer -- (manage Harvest Goods)
+}
+@enduml
+----
+
+
+
