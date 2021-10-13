@@ -24,10 +24,8 @@ Farmverwaltung ist eine Applikation die es dem Benutzer, im Anwendungsfall einem
 class Animal {
     -id: Long
     -species : String
-    -name: String
     -gender: String
     -birthDate: LocalDate
-    -stabled: boolean
 }
 
 class Stable {
@@ -37,8 +35,9 @@ class Stable {
 }
 
 class HarvestGood {
+    -id: Long
     -name: String
-    -isFeed: boolean
+    -isFeed: Boolean
     -quantity: Integer
 }
 
