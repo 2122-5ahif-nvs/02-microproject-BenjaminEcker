@@ -1,15 +1,20 @@
 package at.htl.farm.entity;
 
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
+import javax.json.bind.annotation.JsonbProperty;
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Schema(description = "This is an Animal, preferred cattle")
 public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String species;
     private String gender;
+    @JsonbProperty("birth_date")
     private LocalDate birthDate;
 
     public Animal() {

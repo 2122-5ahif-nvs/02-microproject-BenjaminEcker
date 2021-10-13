@@ -21,12 +21,20 @@ public class AnimalResource {
     @Inject
     Logger logger;
 
+    @Operation(
+            summary = "Find All Animals",
+            description = "Gets all animals from a collection in the repository"
+    )
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Animal> findAllAnimals(){
         return animalRepository.listAll();
     }
 
+    @Operation(
+            summary = "Find an Animal",
+            description = "Finds a animal from the repository via id"
+    )
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -34,18 +42,30 @@ public class AnimalResource {
         return this.animalRepository.findById(id);
     }
 
+    @Operation(
+            summary = "Create a new Animal",
+            description = "Creates a new Animal and adds it into a collection in the Repository"
+    )
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createAnimal(Animal animal) {
         return Response.ok(animalRepository.addAnimal(animal), MediaType.APPLICATION_JSON).build();
     }
 
+    @Operation(
+            summary = "Update an Animal",
+            description = "Updates an already existing animal from the collection in the repository"
+    )
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateAnimal(Animal animal){
         return Response.ok(animalRepository.updateAnimal(animal), MediaType.APPLICATION_JSON).build();
     }
 
+    @Operation(
+            summary = "Delete an Animal",
+            description = "Deletes an existing animal from the collection in the repository via id"
+    )
     @DELETE
     @Path("{id}")
     public Response deleteAnimal(@PathParam("id") Long id){
