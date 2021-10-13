@@ -1,11 +1,19 @@
 package at.htl.farm.entity;
 
+import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 
+@Entity
 public class Stable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OneToMany
+    @JoinColumn(name = "animal_id")
     private List<Animal> animals;
+    @OneToMany
+    @JoinColumn(name = "harvest_good_id")
     private List<HarvestGood> harvestGoods;
 
     public Stable() {
@@ -41,6 +49,20 @@ public class Stable {
 
     public void setHarvestGoods(List<HarvestGood> harvestGoods) {
         this.harvestGoods = harvestGoods;
+    }
+
+    public void addAnimals(Animal animal){
+        if(!animals.contains(animal)){
+            animals.add(animal);
+        }
+        throw new IllegalArgumentException("Animal already in Stable");
+    }
+
+    public void addHarvestGood(HarvestGood harvestGood) {
+        if(!harvestGoods.contains(harvestGood)) {
+            harvestGoods.add(harvestGood);
+        }
+        throw new IllegalArgumentException("Harvest Good already in Stable");
     }
 
     @Override

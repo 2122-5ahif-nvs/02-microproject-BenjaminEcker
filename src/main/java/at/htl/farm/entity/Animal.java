@@ -1,8 +1,12 @@
 package at.htl.farm.entity;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
 public class Animal {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String species;
     private String gender;

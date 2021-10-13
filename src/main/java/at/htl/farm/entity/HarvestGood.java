@@ -1,6 +1,11 @@
 package at.htl.farm.entity;
 
+import javax.persistence.*;
+
+@Entity
 public class HarvestGood {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Boolean isFeed;
